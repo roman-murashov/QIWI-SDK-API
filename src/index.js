@@ -1,3 +1,3 @@
-import RestV3 from './RestV3.js';
+import QiwiBillsApi from './QiwiBillsApi.js';
 
-export default RestV3;
+export default QiwiBillsApi;

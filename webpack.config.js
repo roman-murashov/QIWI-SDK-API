@@ -1,7 +1,7 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
 
-var libraryName = 'RestV3';
+const libraryName = 'RestV3';
 
 module.exports = {
     entry: [
@@ -17,8 +17,7 @@ module.exports = {
     module: {
         rules: [{
             test: /\.js$/,
-            exclude: /node_modules/,
-            loader: "babel-loader"
+            exclude: /node_modules/
         }]
     },
     plugins: [
