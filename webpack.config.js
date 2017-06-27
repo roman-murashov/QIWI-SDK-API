@@ -1,10 +1,10 @@
 var path = require('path');
+var webpack = require('webpack');
 
 var libraryName = 'RestV3';
 
 module.exports = {
     entry: [
-        'babel-polyfill',
         './src'
     ],
     output: {
@@ -20,5 +20,19 @@ module.exports = {
             exclude: /node_modules/,
             loader: "babel-loader"
         }]
-    }
+    },
+    plugins: [
+        /*new webpack.optimize.UglifyJsPlugin({
+            output: {
+                comments: false
+            },
+            compress: {
+                warnings: false
+            }
+        }),*/
+        new webpack.ProvidePlugin({
+            'Promise': 'imports-loader?this=>global!exports-loader?global.Promise!es6-promise',
+            'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
+        })
+    ]
 };
