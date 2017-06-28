@@ -7,7 +7,7 @@ export default class QiwiBillsApi {
     /**
      * Constructs the object.
      *
-     * @param      {!string}  key     The key
+     * @param      {string}  key     The key
      */
     constructor(key) {
         this._key = key;
@@ -15,7 +15,7 @@ export default class QiwiBillsApi {
     /**
      * Key setter
      *
-     * @param      {!string}  key     The key
+     * @param      {string}  key     The key
      */
     set key(key) {
         this._key = key;
@@ -37,30 +37,18 @@ export default class QiwiBillsApi {
             'Authorization': `Bearer ${this._key}`
         };
 
-        return fetch(`https://api.qiwi.com/api/v3/prv/bills/${url}`, {
-            method,
-            headers,
-            body
-        })
-        .then(res => res.json())
-        .catch(error => {
-            console.log('Request failed', error);
-        });
-
-        /*try {
-            const data = await fetch(`api.qiwi.com/api/v3/prv/bills/${url}`, {
+        try {
+            const data = await fetch(`//api.qiwi.com/api/v3/prv/bills/${url}`, {
                 method,
                 headers,
                 body
             });
 
-            const json = await data.json();
-
-            return json;
+            return await data.json();
 
         } catch (e) {
-            console.error('Request failed', e)
-        }*/
+            return e.message;
+        }
     }
     /**
      * Creating checkout link
@@ -72,7 +60,7 @@ export default class QiwiBillsApi {
 
         const options = {
             url: bill_id,
-            method: 'PUT'
+            method: /*'PUT'*/'GET'
         };
 
         return this._requestBuilder(options);
