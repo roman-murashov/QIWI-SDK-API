@@ -1,27 +1,48 @@
 import fetch from 'node-fetch';
 import { URLSearchParams } from 'url';
 /**
- * Class for rest v 3.
+ * Class for rest v 2.
  *
  * @class
  */
-export default class QiwiBillsApi {
+export default class oldQiwiBillsApi {
     /**
      * Constructs the object.
      *
-     * @param      {string}  key     The key
+     * @param      {(string|number)}  api_id        The api identifier
+     * @param      {(string|number)}  api_password  The api password
+     * @param      {(string|number)}  prv_id        The prv identifier
      */
-    constructor(key) {
-        this._key = key;
+    constructor(api_id, api_password, prv_id) {
+        this._apiId = api_id;
+        this._apiPassword = api_password;
+        this._prvId =  prv_id
     }
     /**
-     * Key setter
+     * Api id setter
      *
-     * @param      {string}  key     The key
+     * @param      {(string|number)}  api_id        The api
      */
-    set key(key) {
-        this._key = key;
+    set apiId(api_id) {
+        this._apiId = api_id;
     }
+    /**
+     * Api password setter
+     *
+     * @param      {(string|number)}  api_password  The api password
+     */
+    set apiPassword(api_password) {
+        this._apiPassword = api_password;
+    }
+    /**
+     * Provider id setter
+     *
+     * @param      {(string|number)}  prv_id        The prv
+     */
+    set prvId(prv_id) {
+        this._prvId = prv_id
+    }
+
     /**
      * Build request
      *
@@ -33,16 +54,16 @@ export default class QiwiBillsApi {
      */
     async _requestBuilder({ url, method, body = null }) {
 
-        const key = new Buffer(this._key).toString('base64');
+        const key = new Buffer(`${this._apiId}:${this._apiPassword}`).toString('base64');
 
         const headers = {
             'Accept': 'text/json',
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': `Bearer ${key}`
+            'Authorization': `Basic ${key}`
         };
 
         try {
-            const data = await fetch(`https://api.qiwi.com/api/v3/prv/bills/${url}`, {
+            const data = await fetch(`https://api.qiwi.com/api/v2/prv/${this._prvId}/bills/${url}`, {
                 method,
                 headers,
                 body: new URLSearchParams(body)
@@ -60,11 +81,12 @@ export default class QiwiBillsApi {
      * @param      {(string|number)}  bill_id  The bill identifier
      * @return     {Promise<Object>|Error}  Return promise with result
      */
-    createPaymentForm(bill_id) {
+    createPaymentForm(bill_id, fields) {
 
         const options = {
             url: bill_id,
-            method: 'PUT'
+            method: 'PUT',
+            body: fields
         };
 
         return this._requestBuilder(options);
