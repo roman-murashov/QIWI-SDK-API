@@ -72,7 +72,7 @@ export default class oldQiwiBillsApi {
             return await data.json();
 
         } catch (e) {
-            return e.message;
+            console.error(e.message);
         }
     }
     /**

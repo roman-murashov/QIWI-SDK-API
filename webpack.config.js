@@ -20,5 +20,8 @@ module.exports = {
             test: /\.js$/,
             exclude: /node_modules/
         }]
-    }
+    },
+    plugins: [
+        new webpack.NormalModuleReplacementPlugin(/\/iconv-loader$/, 'node-noop')
+    ]
 };

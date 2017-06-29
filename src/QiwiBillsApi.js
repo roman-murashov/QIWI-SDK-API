@@ -51,7 +51,7 @@ export default class QiwiBillsApi {
             return await data.json();
 
         } catch (e) {
-            return e.message;
+            console.error(e.message);
         }
     }
     /**

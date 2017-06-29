@@ -25,24 +25,18 @@ const fields = {
 
 qiwiRestApi.createPaymentForm(billId, fields).then(data => {
     console.log(data);
-}).catch(error => {
-    console.log(error);
 });
 
 
 
 qiwiRestApi.getStatus(billId).then(data => {
     console.log(data);
-}).catch(error => {
-    console.log(error);
 });
 
 
 
 qiwiRestApi.cancel(billId).then(data => {
     console.log(data);
-}).catch(error => {
-    console.log(error);
 });
 
 
@@ -50,14 +44,10 @@ qiwiRestApi.cancel(billId).then(data => {
 
 /*qiwiRestApi.refund(billId, refundId, amount).then(data => {
     console.log(data);
-}).catch(error => {
-    console.log(error);
 });
 
 
 
 qiwiRestApi.getRefundStatus(billId, refundId).then(data => {
     console.log(data);
-}).catch(error => {
-    console.log(error);
 });*/
