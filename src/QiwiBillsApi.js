@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import request from './request.js';
 import { URLSearchParams } from 'url';
 /**
  * Class for rest v 3.
@@ -41,14 +41,19 @@ export default class QiwiBillsApi {
             'Authorization': `Bearer ${key}`
         };
 
-        try {
-            const data = await fetch(`https://api.qiwi.com/api/v3/prv/bills/${url}`, {
-                method,
-                headers,
-                body: new URLSearchParams(body)
-            });
+        const options = {
+            hostname: 'api.qiwi.com',
+            path: `/api/v3/prv/bills/${url}`,
+            method,
+            headers,
+            body: new URLSearchParams(body)
+        };
 
-            return await data.json();
+        try {
+
+            const data = await request(options);
+
+            return JSON.parse(data);
 
         } catch (e) {
             console.error(e.message);
