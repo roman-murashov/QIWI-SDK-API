@@ -22,25 +22,31 @@ const fields = {
     user: 'tel:+79995611695'
 };
 
+describe('qiwi api v2', function() {
+    it('creates payment form', function(done) {
+        qiwiRestApi.createPaymentForm(billId, fields).then(data => {
+            console.log(data);
+            // TODO assert
+            done();
+        });
+    });
 
-qiwiRestApi.createPaymentForm(billId, fields).then(data => {
-    console.log(data);
+    it('returns valid bill status', function(done) {
+        qiwiRestApi.getStatus(billId).then(data => {
+            console.log(data);
+            // TODO assert
+            done();
+        });
+    });
+
+    it('cancels bill', function(done) {
+        qiwiRestApi.cancel(billId).then(data => {
+            // TODO assert
+            console.log(data);
+            done();
+        });
+    });
 });
-
-
-
-qiwiRestApi.getStatus(billId).then(data => {
-    console.log(data);
-});
-
-
-
-qiwiRestApi.cancel(billId).then(data => {
-    console.log(data);
-});
-
-
-
 
 /*qiwiRestApi.refund(billId, refundId, amount).then(data => {
     console.log(data);
