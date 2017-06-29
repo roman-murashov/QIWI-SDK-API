@@ -11,10 +11,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-
     "mocha": "^3.4.2",
-    "node-noop": "^1.0.0",
-
     "webpack": "^3.0.0"
   },
   "dependencies": {}

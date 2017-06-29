@@ -2,5 +2,6 @@
 *.sublime-project
 /bower_components
 /node_modules
+/lib
 .idea
 .log
