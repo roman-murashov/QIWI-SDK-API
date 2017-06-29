@@ -4,12 +4,17 @@
   "description": "",
   "scripts": {
     "build": "webpack",
-    "test-v2": "node --harmony test/apiV2.js",
-    "test-v3": "node --harmony test/apiV3.js"
+    "test": "npm run test-v3 && npm run test-v2",
+    "test-v2": "mocha --harmony test/apiV2.js",
+    "test-v3": "mocha --harmony test/apiV3.js"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
+
+    "mocha": "^3.4.2",
+    "node-noop": "^1.0.0",
+
     "webpack": "^3.0.0"
   },
   "dependencies": {}
