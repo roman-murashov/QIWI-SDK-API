@@ -1,4 +1,7 @@
 const API = require('../lib');
+const chai = require('chai');
+
+const assert = chai.assert;
 
 const prv_id = 481466;
 const api_id = '59058292';
@@ -25,7 +28,8 @@ const fields = {
 describe('qiwi api v2', function() {
     it('creates payment form', function(done) {
         qiwiRestApi.createPaymentForm(billId, fields).then(data => {
-            console.log(data);
+
+            assert.equal(data.response.result_code, '215');
             // TODO assert
             done();
         });
@@ -33,16 +37,14 @@ describe('qiwi api v2', function() {
 
     it('returns valid bill status', function(done) {
         qiwiRestApi.getStatus(billId).then(data => {
-            console.log(data);
-            // TODO assert
+            assert.equal(data.response.result_code, '0');
             done();
         });
     });
 
     it('cancels bill', function(done) {
         qiwiRestApi.cancel(billId).then(data => {
-            // TODO assert
-            console.log(data);
+            assert.equal(data.response.result_code, '78');
             done();
         });
     });

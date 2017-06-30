@@ -1,4 +1,7 @@
-const API = require('../lib').default;
+const API = require('../lib');
+const chai = require('chai');
+
+const assert = chai.assert;
 
 const key = '59058292';
 
