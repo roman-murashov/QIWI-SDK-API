@@ -1,10 +1,10 @@
-const API = require('../lib').default;
+const API = require('../lib');
 
 const prv_id = 481466;
 const api_id = '59058292';
 const api_password = 'MzAci8yl2NZgmoZDMZRD';
 
-const qiwiRestApi = new API.oldQiwiBillsApi(api_id, api_password, prv_id);
+const qiwiRestApi = new API.oldQiwiBillsApi(prv_id, api_id, api_password);
 
 qiwiRestApi.prvId = prv_id;
 qiwiRestApi.apiPassword = api_password;
