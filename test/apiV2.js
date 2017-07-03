@@ -7,7 +7,7 @@ const prv_id = 481466;
 const api_id = '59058292';
 const api_password = 'MzAci8yl2NZgmoZDMZRD';
 
-const qiwiRestApi = new API.oldQiwiBillsApi(prv_id, api_id, api_password);
+const qiwiRestApi = new API.QiwiPullAPI(prv_id, api_id, api_password);
 
 qiwiRestApi.prvId = prv_id;
 qiwiRestApi.apiPassword = api_password;
@@ -27,10 +27,9 @@ const fields = {
 
 describe('qiwi api v2', function() {
     it('creates payment form', function(done) {
-        qiwiRestApi.createPaymentForm(billId, fields).then(data => {
+        qiwiRestApi.createBill(billId, fields).then(data => {
 
             assert.equal(data.response.result_code, '215');
-            // TODO assert
             done();
         });
     });
@@ -47,6 +46,24 @@ describe('qiwi api v2', function() {
             assert.equal(data.response.result_code, '78');
             done();
         });
+    });
+
+    it('get redirect url', function(done) {
+
+        options = {
+            transaction: billId,
+            iframe: true,
+            successUrl:'https://example.com/successUrl',
+            failUrl: 'https://example.com/failUrl',
+            pay_source: 'mobile'
+        };
+
+        result = qiwiRestApi.redirectUrlBuilder(options);
+
+        assert.equal('https://bill.qiwi.com/order/external/main.action?shop=481466&transaction=testBillplatieAga&iframe=true&successUrl=https%3A%2F%2Fexample.com%2FsuccessUrl&failUrl=https%3A%2F%2Fexample.com%2FfailUrl&target=&pay_source=mobile', result);
+
+        done();
+
     });
 });
 

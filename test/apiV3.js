@@ -5,7 +5,7 @@ const assert = chai.assert;
 
 const key = '59058292';
 
-const qiwiRestApi = new API.QiwiBillsApi(key);
+const qiwiRestApi = new API.QiwiBillPaymentsAPI(key);
 
 qiwiRestApi.key = key;
 
